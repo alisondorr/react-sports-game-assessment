@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// ReactDom lines are only required in index.js file
 ReactDOM.render(
   <React.StrictMode>
     <App />

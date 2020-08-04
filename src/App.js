@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Team from './components/team'
+import Game from './components/game'
+import ScoreBoard from './components/scoreboard'
 
 function App() {
   return (
