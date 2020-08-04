@@ -2,7 +2,7 @@
 import React from 'react'
 import Game from '/components/game'
 
-
+//change for git hub
 function Team(props) {
     let shotPercentageDiv
 
