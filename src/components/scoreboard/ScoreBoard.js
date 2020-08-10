@@ -1,7 +1,6 @@
 //Component Score Board
 import React from 'react'
-import team from 'Team'
-import game from 'Game'
+import { render } from '@testing-library/react'
 
 function ScoreBoard(props) {
     return (
@@ -20,9 +19,7 @@ function ScoreBoard(props) {
         </div>
     )
 }
-
-
-
+render()
 
 
 export default ScoreBoard

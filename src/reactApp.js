@@ -1,11 +1,57 @@
-//This is the game component
 import React from 'react'
-import Team from '../team/Team'
-import soundOne from '../../assets/audio/smb_1-up.wav'
-import soundTwo from '../../assets/audio/smb_fireball.wav'
-import ScoreBoard from '../scoreboard/ScoreBoard'
 
+function Team(props) {
+    let shotPercentageDiv
 
+    if (props.stats.shots) {
+        const shotPercentage = Math.round((props.stats.score / props.stats.shots) * 100)
+        shotPercentageDiv = (
+            <div>
+                <strong>Shooting %: {shotPercentage}</strong>
+            </div>
+        )
+    }
+
+    return (
+        <div className="Team">
+            <h2>{props.name}</h2>
+
+            <div className="identity">
+                <img src={props.logo} alt={props.name} />
+            </div>
+
+            <div>
+                <strong>Shots:</strong> {props.stats.shots}
+            </div>
+
+            <div>
+                <strong>Score:</strong> {props.stats.score}
+            </div>
+
+            {shotPercentageDiv}
+
+            <button onClick={props.shotHandler}>Shoot!</button>
+        </div>
+    )
+}
+
+function ScoreBoard(props) {
+    return (
+        <div className="ScoreBoard">
+            <div className="teamStats">
+                <h3>VISITORS</h3>
+                <h3>{props.visitingTeamStats.score}</h3>
+            </div>
+
+            <h3>SCOREBOARD</h3>
+
+            <div className="teamStats">
+                <h3>HOME</h3>
+                <h3>{props.homeTeamStats.score}</h3>
+            </div>
+        </div>
+    )
+}
 
 class Game extends React.Component {
     constructor(props) {
@@ -23,8 +69,8 @@ class Game extends React.Component {
             }
         }
 
-        this.shotSound = new Audio(soundTwo)
-        this.scoreSound = new Audio(soundOne)
+        this.shotSound = new Audio('./assets/audio/smb_fireball.wav')
+        this.scoreSound = new Audio('./assets/audio/smb_1-up.wav')
     }
 
     shoot = (team) => {
@@ -98,4 +144,45 @@ class Game extends React.Component {
         )
     }
 }
-export default Game
+
+function App(props) {
+    const raccoons = {
+        name: 'Russiaville Raccoons',
+        logoSrc: './assets/images/raccoon.png'
+    }
+
+    const squirrels = {
+        name: 'Sheridan Squirrels',
+        logoSrc: './assets/images/squirrel.png'
+    }
+
+    const bunnies = {
+        name: 'Burlington Bunnies',
+        logoSrc: './assets/images/bunny.png'
+    }
+
+    const hounds = {
+        name: 'Hammond Hounds',
+        logoSrc: './assets/images/hound.png'
+    }
+
+    return (
+        <div className="App">
+            <Game
+                venue="Union 525 Gem"
+                homeTeam={squirrels}
+                visitingTeam={raccoons}
+            />
+            <Game
+                venue="Sheridan Arena"
+                homeTeam={bunnies}
+                visitingTeam={hounds}
+            />
+        </div>
+    )
+}
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+)
